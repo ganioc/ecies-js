@@ -10,11 +10,6 @@ console.log('pubKey:', pubKeyBuf)
 console.log('pubKey leng:', pubKeyBuf.length)
 const addr = "0x0a3ab88829f7221ee9755eceb5d47a8ed614427d"
 
-const encryptionKey = Buffer.from("abc")
-
-
-
-console.log(encryptionKey.toString())
 
 var privateKeyA = eccrypto.generatePrivate();
 
@@ -24,19 +19,25 @@ console.log('publicKeyA len:', publicKeyA.length)
 var privateKeyB = eccrypto.generatePrivate();
 var publicKeyB = eccrypto.getPublic(privateKeyB);
 
-// Encrypting the message for B.
-// eccrypto.encrypt(pubKeyBuf, Buffer.from("msg to b")).then(function (encrypted) {
-//     console.log(encrypted)
-//     // B decrypting the message.
-//     // eccrypto.decrypt(privateKeyB, encrypted).then(function (plaintext) {
-//     //     console.log("Message to part B:", plaintext.toString());
-//     // });
-// });
 async function main() {
     let encryptMsg = await eccrypto.encrypt(pubKeyBuf, Buffer.from("msg to b"));
+    console.log("\nencoded:")
     console.log(encryptMsg)
+    console.log("iv:", encryptMsg.iv, encryptMsg.iv.length)
+    console.log("ephemPublicKey:", encryptMsg.ephemPublicKey, encryptMsg.ephemPublicKey.length)
+    console.log("ciphertext:", encryptMsg.ciphertext, encryptMsg.ciphertext.length)
+    console.log("mac:", encryptMsg.mac, encryptMsg.mac.length)
 
-    let plainMsg = await eccrypto.decrypt(privKeyBuf, encryptMsg);
+
+
+    console.log('\ndecoded:')
+    const fakeStruct = {
+        iv: encryptMsg.iv,
+        ephemPublicKey: encryptMsg.ephemPublicKey,
+        ciphertext: encryptMsg.ciphertext,
+        mac: encryptMsg.mac
+    }
+    let plainMsg = await eccrypto.decrypt(privKeyBuf, fakeStruct);
     console.log(plainMsg.toString())
 }
 main()
