@@ -20,7 +20,11 @@ var privateKeyB = eccrypto.generatePrivate();
 var publicKeyB = eccrypto.getPublic(privateKeyB);
 
 async function main() {
-    let encryptMsg = await eccrypto.encrypt(pubKeyBuf, Buffer.from("msg to b"));
+    console.log("\narguments:", process.argv.length);
+
+    let keyStr = "956bd3b369a83cf9a6da87dd2d6ebce2b2e0d10763f7c3a87b70e916c09d7472";
+
+    let encryptMsg = await eccrypto.encrypt(pubKeyBuf, Buffer.from(keyStr));
     console.log("\nencoded:")
     console.log(encryptMsg)
     console.log("iv:", encryptMsg.iv, encryptMsg.iv.length)
@@ -28,7 +32,7 @@ async function main() {
     console.log("ciphertext:", encryptMsg.ciphertext, encryptMsg.ciphertext.length)
     console.log("mac:", encryptMsg.mac, encryptMsg.mac.length)
 
-
+    console.log("total length:", encryptMsg.iv.length + encryptMsg.ephemPublicKey.length + encryptMsg.ciphertext.length + encryptMsg.mac.length)
 
     console.log('\ndecoded:')
     const fakeStruct = {
