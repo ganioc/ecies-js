@@ -12,7 +12,7 @@ const eccrypto = require("eccrypto");
 // pub 04d709c4fb8695d079625dc28f019fb615b752dbbfc7fc37ddaa0e2186ed100a88ffb9db5d2e0b4136350b984a83620dbeed13c488116bf4a1ced600d4b1199184
 
 const privKey = "bb899e48c2183e13377f06ea2ce616416ca51d442c82a0dc4970d459eee48727"
-// pub
+// pub  043d527ad7ab840562b36bb9015fb19f5ce545db075eb3cbe4ee116155346920240c417e9d4403e340d58e4f95a6707afe60c218dfe2d5ff3c0b90086323a8d0e7
 
 const privKeyBuf = Buffer.from(privKey, 'hex')
 

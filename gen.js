@@ -23,11 +23,7 @@ async function main() {
     console.log("ephemPublicKey:", encryptMsg.ephemPublicKey, encryptMsg.ephemPublicKey.length)
     console.log("ciphertext:", encryptMsg.ciphertext, encryptMsg.ciphertext.length)
     console.log("mac:", encryptMsg.mac, encryptMsg.mac.length)
-    // let outBuf = Buffer.from([]);
-    // outBuf = Buffer.concat(outBuf, encryptMsg.iv);
-    // outBuf = Buffer.concat(encryptMsg.ephemPublicKey);
-    // outBuf = Buffer.concat(encryptMsg.ciphertext);
-    // outBuf = Buffer.concat(encryptMsg.mac);
+
     let outBuf = Buffer.concat([encryptMsg.iv, encryptMsg.ephemPublicKey, encryptMsg.ciphertext, encryptMsg.mac]);
     console.log("out length sum:", encryptMsg.iv.length + encryptMsg.ephemPublicKey.length + encryptMsg.ciphertext.length + encryptMsg.mac.length)
 
