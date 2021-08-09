@@ -21,10 +21,11 @@ var publicKeyB = eccrypto.getPublic(privateKeyB);
 
 async function main() {
     console.log("\narguments:", process.argv.length);
+    // 614c9c81bae2d6097e1fc1af310f06810a6b85a2f51b40bab70a438fd076e5b2
+    // 956bd3b369a83cf9a6da87dd2d6ebce2b2e0d10763f7c3a87b70e916c09d7472
+    let keyStr = "614c9c81bae2d6097e1fc1af310f06810a6b85a2f51b40bab70a438fd076e5b2";
 
-    let keyStr = "956bd3b369a83cf9a6da87dd2d6ebce2b2e0d10763f7c3a87b70e916c09d7472";
-
-    let encryptMsg = await eccrypto.encrypt(pubKeyBuf, Buffer.from(keyStr));
+    let encryptMsg = await eccrypto.encrypt(pubKeyBuf, Buffer.from(keyStr, 'hex'));
     console.log("\nencoded:")
     console.log(encryptMsg)
     console.log("iv:", encryptMsg.iv, encryptMsg.iv.length)
@@ -42,6 +43,6 @@ async function main() {
         mac: encryptMsg.mac
     }
     let plainMsg = await eccrypto.decrypt(privKeyBuf, fakeStruct);
-    console.log(plainMsg.toString())
+    console.log(plainMsg.toString('hex'))
 }
 main()
